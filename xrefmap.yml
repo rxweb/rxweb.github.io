@@ -1,0 +1,87 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: configure-global-validation-messages
+  name: Introduction to Razor Pages in ASP.NET Core
+  href: reactive-form-validators/configure-global-validation-messages.html
+- uid: import-modules
+  name: reactive form validators
+  href: reactive-form-validators/import-modules.html
+- uid: validation-decorators/alpha
+  name: Alpha Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/alpha.html
+- uid: validation-decorators/alphaNumeric
+  name: AlphaNumeric Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/alphaNumeric.html
+- uid: validation-decorators/contains
+  name: Contains Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/contains.html
+- uid: validation-decorators/creditCard
+  name: CreditCard Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/creditcard.html
+- uid: validation-decorators/digit
+  name: Digit Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/digit.html
+- uid: validation-decorators/email
+  name: Email Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/email.html
+- uid: validation-decorators/greaterThan
+  name: GreaterThan Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/greaterThan.html
+- uid: validation-decorators/greaterThanEqualTo
+  name: GreaterThanEqualTo Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/greaterThanEqualTo.html
+- uid: validation-decorators/hexColor
+  name: HexColor Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/hexColor.html
+- uid: validation-decorators/json
+  name: Json Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/json.html
+- uid: validation-decorators/lessThan
+  name: LessThan Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/lessThan.html
+- uid: validation-decorators/lessThanEqualTo
+  name: LessThanEqualTo Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/lessThanEqualTo.html
+- uid: validation-decorators/lowerCase
+  name: LowerCase Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/lowerCase.html
+- uid: validation-decorators/maxDate
+  name: MaxDate Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/maxDate.html
+- uid: validation-decorators/maxLength
+  name: MaxLength Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/maxLength.html
+- uid: validation-decorators/maxNumber
+  name: MaxNumber Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/maxNumber.html
+- uid: validation-decorators/minDate
+  name: MinDate Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/minDate.html
+- uid: validation-decorators/minLength
+  name: MinLength Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/minLength.html
+- uid: validation-decorators/minNumber
+  name: MinNumber Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/minNumber.html
+- uid: validation-decorators/password
+  name: Password Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/password.html
+- uid: validation-decorators/pattern
+  name: Pattern Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/pattern.html
+- uid: validation-decorators/range
+  name: Range Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/range.html
+- uid: validation-decorators/required
+  name: Required Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/required.html
+- uid: validation-decorators/time
+  name: Time Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/time.html
+- uid: validation-decorators/upperCase
+  name: UpperCase Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/upperCase.html
+- uid: validation-decorators/url
+  name: Url Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/url.html

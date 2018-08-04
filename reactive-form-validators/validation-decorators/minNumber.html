@@ -1,0 +1,480 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html ng-app="app">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>MinNumber Validation in Angular Reactive Forms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="MinNumber Validation in Angular Reactive Forms ">
+    <meta name="generator" content="docfx 2.37.0.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/vendor/font-awesome-4.7.0/css/font-awesome.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120" ng-controller="issueCtrl" ng-init="initIssue()">
+  <input type="hidden" value="" id="rxControlId">
+  <input type="hidden" value="" id="rxContentId">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div style="margin-left:5px;">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a style="padding-top:15px;" class="navbar-brand" href="../../index.html">
+                rxweb
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <!--<form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>-->
+              
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class=" body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+		  
+            <article class="content wrap" id="_content" data-uid="validation-decorators/minNumber">
+<h1 id="minnumber">minNumber</h1>
+
+<p>MinNumber validation decorator will allow only minimum number be entered upto value parameter. If user tries to enter any number that less then the value then the property will become invalid. To use the minNumber decorator on particular property.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_basic-validation-on-ResultInfo-add-form" role="tab" aria-controls="tabpanel_CeZOj-G++Q_basic-validation-on-ResultInfo-add-form" data-tab="basic-validation-on-ResultInfo-add-form" tabindex="0" aria-selected="true">Basic validation on ResultInfo add form  </a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_basic-validation-on-ResultInfo-edit-form" role="tab" aria-controls="tabpanel_CeZOj-G++Q_basic-validation-on-ResultInfo-edit-form" data-tab="basic-validation-on-ResultInfo-edit-form" tabindex="-1">Basic validation on ResultInfo edit  form</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_basic-validation-on-ResultInfo-add-form" role="tabpanel" data-tab="basic-validation-on-ResultInfo-add-form">
+
+<p>let's create a ResultInfo add form with minNumber validation. The form will allow only minimum number of the value parameter in the <code>FormControl</code> of <code>maths</code>.
+Create ResultInfo data model and set the minNumber decorator on <code>maths</code> property.</p>
+<header class="header-tab-title">app/ResultInfo/result-info.model.ts</header>
+<pre><code class="lang-typescript" highlight-lines="5">import {  minNumber, } from &quot;@rxweb/reactive-form-validators&quot;
+export class ResultInfo {
+
+    @minNumber({value:35 }) 
+    maths: number;
+
+}
+</code></pre>
+<p>Create ResultInfo add component and add <code>RxFormBuilder</code> service parameter in constructor. Create a <code>FormGroup</code> object of <code>ResultInfo</code> data model in <code>ngOnInit</code> method.</p>
+<header class="header-tab-title">app/result-info/add/result-info-add.component.ts</header>
+<pre><code class="lang-typescript" highlight-lines="17,21-22">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+
+import { ResultInfo } from '../result-info.model';
+
+@Component({
+    selector: 'app-result-info-add',
+    templateUrl: './result-info-add.component.html'
+})
+export class ResultInfoAddComponent implements OnInit {
+
+    resultInfoFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder
+    ) { }
+
+    ngOnInit() {
+        let resultInfo = new ResultInfo();
+        this.resultInfoFormGroup = this.formBuilder.formGroup(resultInfo);
+    }
+}
+</code></pre><header class="header-tab-title">app/result-info/add/result-info-add.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;minNumber Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;resultInfoFormGroup&quot; [formGroup]=&quot;resultInfoFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Maths&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;maths&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.maths.errors&quot;&gt;{{resultInfoFormGroup.controls.maths.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!resultInfoFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre><h3>ResultInfo Add Form Validation Example</h3>
+<iframe src="https://stackblitz.com/edit/rxweb-minnumber-validation-add-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
+</iframe></section>
+<section id="tabpanel_CeZOj-G++Q_basic-validation-on-ResultInfo-edit-form" role="tabpanel" data-tab="basic-validation-on-ResultInfo-edit-form" aria-hidden="true" hidden="hidden">
+
+<p>let's create a ResultInfo edit form with minNumber validation. The form will allow only minimum number of the value parameter in the <code>FormControl</code> of <code>maths</code>.
+Create country data model and set the minNumber decorator on <code>maths</code> property.</p>
+<header class="header-tab-title">app/ResultInfo/result-info.model.ts</header>
+<pre><code class="lang-typescript" highlight-lines="5">import {  minNumber, } from &quot;@rxweb/reactive-form-validators&quot;
+export class ResultInfo {
+
+    @minNumber({value:35 }) 
+    maths: number;
+
+}
+</code></pre>
+<p>Create ResultInfo edit component and add <code>RxFormBuilder</code> and <code>HttpClient</code> service parameter  in constructor. On <code>ngOnInit</code> method get request method for getting data from json or server and that data pass in <code>this.formBuilder.formGroup&lt;ResultInfo&gt;(ResultInfo,resultInfo)</code></p>
+<header class="header-tab-title">app/result-info/edit/result-info-edit.component.ts</header>
+<pre><code class="lang-typescript" highlight-lines="17,21-22">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+import { HttpClient } from '@angular/common/http';
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+
+import { ResultInfo } from '../result-info.model';
+
+@Component({
+    selector: 'app-result-info-edit',
+    templateUrl: './result-info-edit.component.html'
+})
+export class ResultInfoEditComponent implements OnInit {
+
+    resultInfoFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder,		private http: HttpClient
+
+    ) { }
+
+    ngOnInit() {
+        this.http.get('assets/result-info-data.json').subscribe(resultInfo =&gt; {
+            this.resultInfoFormGroup = this.formBuilder.formGroup&lt;ResultInfo&gt;(ResultInfo,resultInfo);
+        })
+    }
+}
+</code></pre><header class="header-tab-title">app/result-info/edit/result-info-edit.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;minNumber Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;resultInfoFormGroup&quot; [formGroup]=&quot;resultInfoFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Maths&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;maths&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.maths.errors&quot;&gt;{{resultInfoFormGroup.controls.maths.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!resultInfoFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre><h3>ResultInfo Edit Form Validation Example</h3>
+<iframe src="https://stackblitz.com/edit/rxweb-minnumber-validation-edit-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
+</iframe></section>
+</div>
+<h1 id="numberconfig">NumberConfig</h1>
+<p>message and conditional expression options are not mandatory to use in the <code>@minNumber()</code> decorator but value is mandatory. If needed then use the below options.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#conditionalexpression">conditionalExpression</a></td>
+<td>Min Number validation should be applied if the condition is matched in the <code>conditionalExpression</code> function. Validation framework will pass two parameters at the time of <code>conditionalExpression</code> check. Those two parameters are current <code>FormGroup</code> value and root <code>FormGroup</code> value. You can apply the condition on respective object value.If there is need of dynamic validation means it is not fixed in client code, it will change based on some criterias. In this scenario you can bind the expression based on the expression value is coming from the web server in <code>string</code> format. The <code>conditionalExpression</code> will work as same as client function.</td>
+</tr>
+<tr>
+<td><a href="#message">message</a></td>
+<td>To override the global configuration message and show the custom message on particular control property.</td>
+</tr>
+<tr>
+<td><a href="#value">value</a></td>
+<td>enter value which you want to restrict number in the property</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conditionalexpression">conditionalExpression</h2>
+<p>Type :  <code>Function</code>  |  <code>string</code></p>
+<p>Min Number validation should be applied if the condition is matched in the <code>conditionalExpression</code> function. Validation framework will pass two parameters at the time of <code>conditionalExpression</code> check. Those two parameters are current <code>FormGroup</code> value and root <code>FormGroup</code> value. You can apply the condition on respective object value.
+If there is need of dynamic validation means it is not fixed in client code, it will change based on some criterias. In this scenario you can bind the expression based on the expression value is coming from the web server in <code>string</code> format. The <code>conditionalExpression</code> will work as same as client function.</p>
+<blockquote>
+<p>Binding <code>conditionalExpression</code> with <code>Function</code> object.</p>
+</blockquote>
+<header class="header-title">result-info.model.ts (ResultInfo class property)</header>
+<pre><code class="lang-typescript">@minNumber({value:35  ,conditionalExpressions:x =&gt; x.maths == 50 }) 
+statastics: number;
+</code></pre>
+<blockquote>
+<p>Binding <code>conditionalExpression</code> with <code>string</code> datatype.</p>
+</blockquote>
+<header class="header-title">result-info.model.ts (ResultInfo class property)</header>
+<pre><code class="lang-typescript">@minNumber({value:35  ,conditionalExpressions:x =&gt; x.maths == 50 }) 
+statastics: number;
+</code></pre><h2 id="message">message</h2>
+<p>Type :  <code>string</code></p>
+<p>To override the global configuration message and show the custom message on particular control property.</p>
+<header class="header-title">result-info.model.ts (ResultInfo class property)</header>
+<pre><code class="lang-typescript">@minNumber({value:35  ,message:'Number should not be less than 35' }) 
+science: number;
+</code></pre><h2 id="value">value</h2>
+<p>Type :  <code>number</code></p>
+<p>enter value which you want to restrict number in the property</p>
+<header class="header-title">result-info.model.ts (ResultInfo class property)</header>
+<pre><code class="lang-typescript">@minNumber({value:35  ,message:'Number should not be less than 35' }) 
+science: number;
+</code></pre><h1 id="minnumber-validation-complete-example">minNumber Validation Complete Example</h1>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-result-info" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-result-info" data-tab="complete-result-info" tabindex="0" aria-selected="true">ResultInfo Model</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-result-info-add-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-result-info-add-component" data-tab="complete-result-info-add-component" tabindex="-1">Address Info Add Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-result-info-add-html-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-result-info-add-html-component" data-tab="complete-result-info-add-html-component" tabindex="-1">Address Info Add Html Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-working-example" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-working-example" data-tab="complete-working-example" tabindex="-1">Working Example</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_complete-result-info" role="tabpanel" data-tab="complete-result-info">
+<header class="header-tab-title">app/result-info/result-info.model.ts</header>
+<pre><code class="lang-typescript">import {  minNumber, } from &quot;@rxweb/reactive-form-validators&quot;
+export class ResultInfo {
+
+    @minNumber({value:35 }) 
+    maths: number;
+
+    @minNumber({value:35  ,message:'Number should not be less than 35' }) 
+    science: number;
+
+    @minNumber({value:35  ,conditionalExpressions:x =&gt; x.maths == 50 }) 
+    statastics: number;
+
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-1_complete-result-info-add-component" role="tabpanel" data-tab="complete-result-info-add-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/result-info/add/result-info-add.component.ts</header>
+<pre><code class="lang-typescript">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+
+import { ResultInfo } from '../result-info.model';
+
+@Component({
+    selector: 'app-result-info-add',
+    templateUrl: './result-info-add.component.html'
+})
+export class ResultInfoAddComponent implements OnInit {
+
+    resultInfoFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder
+    ) { }
+
+    ngOnInit() {
+        let resultInfo = new ResultInfo();
+        this.resultInfoFormGroup = this.formBuilder.formGroup(resultInfo);
+    }
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-1_complete-result-info-add-html-component" role="tabpanel" data-tab="complete-result-info-add-html-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/result-info/add/result-info-add.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;minNumber Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;resultInfoFormGroup&quot; [formGroup]=&quot;resultInfoFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Maths&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;maths&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.maths.errors&quot;&gt;{{resultInfoFormGroup.controls.maths.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Science&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;science&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Shows Custom Validation Message&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.science.errors&quot;&gt;{{resultInfoFormGroup.controls.science.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Statastics&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;statastics&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Conditional validation will be applied if the 'Maths' field have value of '50'&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.statastics.errors&quot;&gt;{{resultInfoFormGroup.controls.statastics.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!resultInfoFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-1_complete-working-example" role="tabpanel" data-tab="complete-working-example" aria-hidden="true" hidden="hidden">
+<iframe src="https://stackblitz.com/edit/complete-rxweb-minnumber-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+</iframe></section>
+</div>
+<h1 id="dynamic-minnumber-validation-complete-example">Dynamic minNumber Validation Complete Example</h1>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-result-info" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-result-info" data-tab="dynamic-result-info" tabindex="0" aria-selected="true">ResultInfo Model</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-result-info-add-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-result-info-add-component" data-tab="dynamic-result-info-add-component" tabindex="-1">Address Info Add Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-result-info-add-html-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-result-info-add-html-component" data-tab="dynamic-result-info-add-html-component" tabindex="-1">Address Info Add Html Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-working-example" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-working-example" data-tab="dynamic-working-example" tabindex="-1">Working Example</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-result-info" role="tabpanel" data-tab="dynamic-result-info">
+<header class="header-tab-title">app/result-info/result-info.model.ts</header>
+<pre><code class="lang-typescript">import {prop} from '@rxweb/reactive-form-validators'
+export class ResultInfo {
+
+    @prop()
+    maths: number;
+
+    @prop()
+    science: number;
+
+    @prop()
+    statastics: number;
+
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-result-info-add-component" role="tabpanel" data-tab="dynamic-result-info-add-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/result-info/add/result-info-add.component.ts</header>
+<pre><code class="lang-typescript">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+import { FormBuilderConfiguration  } from '@rxweb/reactive-form-validators';
+
+import { ResultInfo } from '../result-info.model';
+
+@Component({
+    selector: 'app-result-info-add',
+    templateUrl: './result-info-add.component.html'
+})
+export class ResultInfoAddComponent implements OnInit {
+
+    resultInfoFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder
+    ) { }
+
+    ngOnInit() {
+        let resultInfo = new ResultInfo();
+        let formBuilderConfiguration = new FormBuilderConfiguration();
+        formBuilderConfiguration.validations = {
+            maths : {
+                minNumber :  {value:35,} 
+            },
+            science : {
+                minNumber :  {value:35,message:'Number should not be less than 35',} 
+            },
+            statastics : {
+                minNumber :  {value:35,conditionalExpressions:'x =&gt; x.maths == 50',} 
+            },
+        };
+        this.resultInfoFormGroup = this.formBuilder.formGroup(resultInfo,formBuilderConfiguration);
+    }
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-result-info-add-html-component" role="tabpanel" data-tab="dynamic-result-info-add-html-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/result-info/add/result-info-add.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;minNumber Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;resultInfoFormGroup&quot; [formGroup]=&quot;resultInfoFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Maths&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;maths&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.maths.errors&quot;&gt;{{resultInfoFormGroup.controls.maths.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Science&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;science&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Shows Custom Validation Message&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.science.errors&quot;&gt;{{resultInfoFormGroup.controls.science.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Statastics&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;statastics&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Conditional validation will be applied if the 'Maths' field have value of '50'&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;you can enter min number upto 35&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;resultInfoFormGroup.controls.statastics.errors&quot;&gt;{{resultInfoFormGroup.controls.statastics.errors.minNumber.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!resultInfoFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-working-example" role="tabpanel" data-tab="dynamic-working-example" aria-hidden="true" hidden="hidden">
+<iframe src="https://stackblitz.com/edit/dynamic-rxweb-minnumber-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+</iframe></section>
+</div>
+<div id="issue"></div>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rxweb/rxweb/blob/master/docs/reactive-form-validators/validation-decorators/minNumber.md/#L1" id="docUrl" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Your suggestion"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> </a> 
+          		  <a href="" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="View source"><i class="fa fa-code  fa-lg" aria-hidden="true"></i> </a> 
+          		  <a href="https://stackoverflow.com/questions/tagged/rxweb" target="_blank" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Ask Questions"><i class="fa fa-stack-overflow fa-lg" aria-hidden="true"></i> </a>  
+          		  <a href="https://gitter.im/rx-web/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Chat on Gitter"><i class="fa fa-comments fa-lg" aria-hidden="true"></i> </a>
+          		  <a href="https://github.com/rxweb/rxweb/tree/master/packages/reactive-form-validators" target="_blank" class="contribution-link display-inline"><i class="fa fa-github-square fa-lg" aria-hidden="true"></i> </a> 
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/moment/moment.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/showdown/showdown.min.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+    <script type="text/javascript" src="../../styles/custom.js"></script>
+    <script type="text/javascript" src="../../styles/app/appStart/appModule.js"></script>
+    <script type="text/javascript" src="../../styles/app/controllers/appCtrl.js"></script>
+    <script type="text/javascript" src="../../styles/app/controllers/issueCtrl.js"></script>  </body>
+</html>

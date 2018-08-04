@@ -1,0 +1,412 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/Git-Project/rxweb/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "XrUe0JYGkttZ+BuYstC1Rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/configure-global-validation-messages.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/configure-global-validation-messages.html",
+          "hash": "EiBBSYzG6taB/qIVoLEXSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/import-modules.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/import-modules.html",
+          "hash": "9NwdLhCPaAH4gpJTVtIzWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "reactive-form-validators/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/toc.html",
+          "hash": "XX934o8HdckOBstP+gKBhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/alpha.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/alpha.html",
+          "hash": "kB1v3n6GE3n/ZmgZQh8zUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/alphaNumeric.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/alphaNumeric.html",
+          "hash": "t4IoJ6LARvrnTRle1lCsEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/contains.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/contains.html",
+          "hash": "MaudKCm2R460e75RnKUx+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/creditcard.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/creditcard.html",
+          "hash": "0r9K/s4H7KZIhWFxvA2VDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/digit.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/digit.html",
+          "hash": "MRqF1lZyIfKhy0pLD3YgoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/email.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/email.html",
+          "hash": "6OoGUD4G246eQFe6poSIlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/greaterThan.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/greaterThan.html",
+          "hash": "0pIfcex9K4vgpWDSg0yxoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/greaterThanEqualTo.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/greaterThanEqualTo.html",
+          "hash": "uRTYBQhdW+lAINCudYSJcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/hexColor.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/hexColor.html",
+          "hash": "p6VR0uhwouqV3pzJtRgdPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/json.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/json.html",
+          "hash": "Aj8oSgtGWznoes1zEazJEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/lessThan.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/lessThan.html",
+          "hash": "USUxQ9Cy4L1nLw1prVHdcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/lessThanEqualTo.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/lessThanEqualTo.html",
+          "hash": "2k8PG5axfMaKE7ur0GEcGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/lowerCase.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/lowerCase.html",
+          "hash": "gQSfTkmmK4HdwoA8LLrDiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/maxDate.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/maxDate.html",
+          "hash": "Ky3g12h1Jwl/ggoM9BuJcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/maxLength.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/maxLength.html",
+          "hash": "M271IA8DrtmTZO9QCVNi8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/maxNumber.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/maxNumber.html",
+          "hash": "SQej2ulHcTboEUvvzbcmdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/minDate.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/minDate.html",
+          "hash": "2iNDd2ZJcrIHx5niWB4GHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/minLength.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/minLength.html",
+          "hash": "hHnf69oPwkakCCeYF4uWvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/minNumber.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/minNumber.html",
+          "hash": "VQ5EcWoHro7ZRaWWcAeecA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/password.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/password.html",
+          "hash": "LcFfkR28f1nKajNeD6ruqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/pattern.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/pattern.html",
+          "hash": "AcGVoYcBI3bt814+rjrK9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/range.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/range.html",
+          "hash": "duxnupx4j8mUktKwFPW7qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/required.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/required.html",
+          "hash": "puV/emlyycwTapWb+IHC8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/time.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/time.html",
+          "hash": "SFa+THHrhtATx0GUyV3jGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/upperCase.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/upperCase.html",
+          "hash": "wLD+UBKAsWiSAN5fq5T9/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "reactive-form-validators/validation-decorators/url.md",
+      "output": {
+        ".html": {
+          "relative_path": "reactive-form-validators/validation-decorators/url.html",
+          "hash": "Tmsfi1F4g5Bi4Gkw07m/jA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "5pxeoCvzaf7CjT9GvNQTLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

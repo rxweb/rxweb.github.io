@@ -1,0 +1,490 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html ng-app="app">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Time Validation in Angular Reactive Forms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Time Validation in Angular Reactive Forms ">
+    <meta name="generator" content="docfx 2.37.0.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/vendor/font-awesome-4.7.0/css/font-awesome.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120" ng-controller="issueCtrl" ng-init="initIssue()">
+  <input type="hidden" value="" id="rxControlId">
+  <input type="hidden" value="" id="rxContentId">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div style="margin-left:5px;">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a style="padding-top:15px;" class="navbar-brand" href="../../index.html">
+                rxweb
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <!--<form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>-->
+              
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class=" body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+		  
+            <article class="content wrap" id="_content" data-uid="validation-decorators/time">
+<h1 id="time">time</h1>
+
+<p>time validation decorator will allow only time format to be entered. If user tries to enter any string except json then the property will become invalid. To use the json decorator on particular property.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_basic-validation-on-AttandanceDetail-add-form" role="tab" aria-controls="tabpanel_CeZOj-G++Q_basic-validation-on-AttandanceDetail-add-form" data-tab="basic-validation-on-AttandanceDetail-add-form" tabindex="0" aria-selected="true">Basic validation on AttandanceDetail add form  </a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_basic-validation-on-AttandanceDetail-edit-form" role="tab" aria-controls="tabpanel_CeZOj-G++Q_basic-validation-on-AttandanceDetail-edit-form" data-tab="basic-validation-on-AttandanceDetail-edit-form" tabindex="-1">Basic validation on AttandanceDetail edit  form</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_basic-validation-on-AttandanceDetail-add-form" role="tabpanel" data-tab="basic-validation-on-AttandanceDetail-add-form">
+
+<p>let's create a AttandanceDetail add form with time validation. The form will allow only time in the <code>FormControl</code> of <code>entryPlace</code>.
+Create AttandanceDetail data model and set the <code>time</code> decorator on <code>entryPlace</code> property.</p>
+<header class="header-tab-title">app/AttandanceDetail/attandance-detail.model.ts</header>
+<pre><code class="lang-typescript" highlight-lines="5">import {  time, } from &quot;@rxweb/reactive-form-validators&quot;
+export class AttandanceDetail {
+
+    @time() 
+    entryTime: string;
+
+}
+</code></pre>
+<p>Create AttandanceDetail add component and add <code>RxFormBuilder</code> service parameter in constructor. Create a <code>FormGroup</code> object of <code>AttandanceDetail</code> data model in <code>ngOnInit</code> method.</p>
+<header class="header-tab-title">app/attandance-detail/add/attandance-detail-add.component.ts</header>
+<pre><code class="lang-typescript" highlight-lines="17,21-22">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+
+import { AttandanceDetail } from '../attandance-detail.model';
+
+@Component({
+    selector: 'app-attandance-detail-add',
+    templateUrl: './attandance-detail-add.component.html'
+})
+export class AttandanceDetailAddComponent implements OnInit {
+
+    attandanceDetailFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder
+    ) { }
+
+    ngOnInit() {
+        let attandanceDetail = new AttandanceDetail();
+        this.attandanceDetailFormGroup = this.formBuilder.formGroup(attandanceDetail);
+    }
+}
+</code></pre><header class="header-tab-title">app/attandance-detail/add/attandance-detail-add.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;time Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;attandanceDetailFormGroup&quot; [formGroup]=&quot;attandanceDetailFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Entry Time&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;entryTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.entryTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.entryTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!attandanceDetailFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre><h3>AttandanceDetail Add Form Validation Example</h3>
+<iframe src="https://stackblitz.com/edit/rxweb-time-validation-add-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
+</iframe></section>
+<section id="tabpanel_CeZOj-G++Q_basic-validation-on-AttandanceDetail-edit-form" role="tabpanel" data-tab="basic-validation-on-AttandanceDetail-edit-form" aria-hidden="true" hidden="hidden">
+
+<p>let's create a AttandanceDetail edit form with time validation. The form will allow only time in the <code>FormControl</code> of <code>entryPlace</code>.
+Create AttandanceDetail data model and set the time decorator on <code>entryPlace</code> property.</p>
+<header class="header-tab-title">app/AttandanceDetail/attandance-detail.model.ts</header>
+<pre><code class="lang-typescript" highlight-lines="5">import {  time, } from &quot;@rxweb/reactive-form-validators&quot;
+export class AttandanceDetail {
+
+    @time() 
+    entryTime: string;
+
+}
+</code></pre>
+<p>Create AttandanceDetail edit component and add <code>RxFormBuilder</code> and <code>HttpClient</code> service parameter  in constructor. On <code>ngOnInit</code> method get request method for getting data from json or server and that data pass in <code>this.formBuilder.formGroup&lt;AttandanceDetail&gt;(AttandanceDetail,attandanceDetail)</code></p>
+<header class="header-tab-title">app/attandance-detail/edit/attandance-detail-edit.component.ts</header>
+<pre><code class="lang-typescript" highlight-lines="17,21-22">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+import { HttpClient } from '@angular/common/http';
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+
+import { AttandanceDetail } from '../attandance-detail.model';
+
+@Component({
+    selector: 'app-attandance-detail-edit',
+    templateUrl: './attandance-detail-edit.component.html'
+})
+export class AttandanceDetailEditComponent implements OnInit {
+
+    attandanceDetailFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder,		private http: HttpClient
+
+    ) { }
+
+    ngOnInit() {
+        this.http.get('assets/attandance-detail-data.json').subscribe(attandanceDetail =&gt; {
+            this.attandanceDetailFormGroup = this.formBuilder.formGroup&lt;AttandanceDetail&gt;(AttandanceDetail,attandanceDetail);
+        })
+    }
+}
+</code></pre><header class="header-tab-title">app/attandance-detail/edit/attandance-detail-edit.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;time Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;attandanceDetailFormGroup&quot; [formGroup]=&quot;attandanceDetailFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Entry Time&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;entryTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.entryTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.entryTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!attandanceDetailFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre><h3>AttandanceDetail Edit Form Validation Example</h3>
+<iframe src="https://stackblitz.com/edit/rxweb-time-validation-edit-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
+</iframe></section>
+</div>
+<h1 id="timeconfig">TimeConfig</h1>
+<p>Below options are not mandatory to use in the <code>@time()</code> decorator. If needed then use the below options.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#conditionalexpression">conditionalExpression</a></td>
+<td>time validation should be applied if the condition is matched in the <code>conditionalExpression</code> function. Validation framework will pass two parameters at the time of <code>conditionalExpression</code> check. Those two parameters are current <code>FormGroup</code> value and root <code>FormGroup</code> value. You can apply the condition on respective object value.If there is need of dynamic validation means it is not fixed in client code, it will change based on some criterias. In this scenario you can bind the expression based on the expression value is coming from the web server in <code>string</code> format. The <code>conditionalExpression</code> will work as same as client function.</td>
+</tr>
+<tr>
+<td><a href="#allowseconds">allowSeconds</a></td>
+<td>If you are allowed seconds in time format then you need to put this as true.</td>
+</tr>
+<tr>
+<td><a href="#message">message</a></td>
+<td>To override the global configuration message and show the custom message on particular control property.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conditionalexpression">conditionalExpression</h2>
+<p>Type :  <code>Function</code>  |  <code>string</code></p>
+<p>time validation should be applied if the condition is matched in the <code>conditionalExpression</code> function. Validation framework will pass two parameters at the time of <code>conditionalExpression</code> check. Those two parameters are current <code>FormGroup</code> value and root <code>FormGroup</code> value. You can apply the condition on respective object value.
+If there is need of dynamic validation means it is not fixed in client code, it will change based on some criterias. In this scenario you can bind the expression based on the expression value is coming from the web server in <code>string</code> format. The <code>conditionalExpression</code> will work as same as client function.</p>
+<blockquote>
+<p>Binding <code>conditionalExpression</code> with <code>Function</code> object.</p>
+</blockquote>
+<header class="header-title">attandance-detail.model.ts (AttandanceDetail class property)</header>
+<pre><code class="lang-typescript">@time({conditionalExpressions:x =&gt; x.entryPlace == &quot;Lunch Room&quot; }) 
+entryTime: string;
+</code></pre>
+<blockquote>
+<p>Binding <code>conditionalExpression</code> with <code>string</code> datatype.</p>
+</blockquote>
+<header class="header-title">attandance-detail.model.ts (AttandanceDetail class property)</header>
+<pre><code class="lang-typescript">@time({conditionalExpressions:x =&gt; x.entryPlace == &quot;Lunch Room&quot; }) 
+entryTime: string;
+</code></pre><h2 id="allowseconds">allowSeconds</h2>
+<p>Type :  <code>boolean</code></p>
+<p>If you are allowed seconds in time format then you need to put this as true.</p>
+<header class="header-title">attandance-detail.model.ts (AttandanceDetail class property)</header>
+<pre><code class="lang-typescript">@time({allowSeconds:true }) 
+totalOutTime: string;
+</code></pre><h2 id="message">message</h2>
+<p>Type :  <code>string</code></p>
+<p>To override the global configuration message and show the custom message on particular control property.</p>
+<header class="header-title">attandance-detail.model.ts (AttandanceDetail class property)</header>
+<pre><code class="lang-typescript">@time({message:'You can enter only time format data' }) 
+exitTime: string;
+</code></pre><h1 id="time-validation-complete-example">time Validation Complete Example</h1>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-attandance-detail" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-attandance-detail" data-tab="complete-attandance-detail" tabindex="0" aria-selected="true">AttandanceDetail Model</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-attandance-detail-add-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-attandance-detail-add-component" data-tab="complete-attandance-detail-add-component" tabindex="-1">Address Info Add Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-attandance-detail-add-html-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-attandance-detail-add-html-component" data-tab="complete-attandance-detail-add-html-component" tabindex="-1">Address Info Add Html Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_complete-working-example" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_complete-working-example" data-tab="complete-working-example" tabindex="-1">Working Example</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_complete-attandance-detail" role="tabpanel" data-tab="complete-attandance-detail">
+<header class="header-tab-title">app/attandance-detail/attandance-detail.model.ts</header>
+<pre><code class="lang-typescript">import {  time, prop  } from &quot;@rxweb/reactive-form-validators&quot;
+export class AttandanceDetail {
+
+    @prop()
+    entryPlace: string;
+
+    @time({conditionalExpressions:x =&gt; x.entryPlace == &quot;Lunch Room&quot; }) 
+    entryTime: string;
+
+    @time({allowSeconds:true }) 
+    totalOutTime: string;
+
+    @time({message:'You can enter only time format data' }) 
+    exitTime: string;
+
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-1_complete-attandance-detail-add-component" role="tabpanel" data-tab="complete-attandance-detail-add-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/attandance-detail/add/attandance-detail-add.component.ts</header>
+<pre><code class="lang-typescript">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+
+import { AttandanceDetail } from '../attandance-detail.model';
+
+@Component({
+    selector: 'app-attandance-detail-add',
+    templateUrl: './attandance-detail-add.component.html'
+})
+export class AttandanceDetailAddComponent implements OnInit {
+
+    attandanceDetailFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder
+    ) { }
+
+    ngOnInit() {
+        let attandanceDetail = new AttandanceDetail();
+        this.attandanceDetailFormGroup = this.formBuilder.formGroup(attandanceDetail);
+    }
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-1_complete-attandance-detail-add-html-component" role="tabpanel" data-tab="complete-attandance-detail-add-html-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/attandance-detail/add/attandance-detail-add.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;time Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;attandanceDetailFormGroup&quot; [formGroup]=&quot;attandanceDetailFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Entry Place&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;entryPlace&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.entryPlace.errors&quot;&gt;{{attandanceDetailFormGroup.controls.entryPlace.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Entry Time&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;entryTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;To apply the validation of time on 'Entry Time' field, then enter the value of 'Lunch Room' in Entry Place textbox.&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.entryTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.entryTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Total Time Out&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;totalOutTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Allow seconds.&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.totalOutTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.totalOutTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Exit Time&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;exitTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Shows Custom Validation Message.&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.exitTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.exitTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!attandanceDetailFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-1_complete-working-example" role="tabpanel" data-tab="complete-working-example" aria-hidden="true" hidden="hidden">
+<iframe src="https://stackblitz.com/edit/complete-rxweb-time-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+</iframe></section>
+</div>
+<h1 id="dynamic-time-validation-complete-example">Dynamic time Validation Complete Example</h1>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail" data-tab="dynamic-attandance-detail" tabindex="0" aria-selected="true">AttandanceDetail Model</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail-add-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail-add-component" data-tab="dynamic-attandance-detail-add-component" tabindex="-1">Address Info Add Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail-add-html-component" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail-add-html-component" data-tab="dynamic-attandance-detail-add-html-component" tabindex="-1">Address Info Add Html Component</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_dynamic-working-example" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_dynamic-working-example" data-tab="dynamic-working-example" tabindex="-1">Working Example</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail" role="tabpanel" data-tab="dynamic-attandance-detail">
+<header class="header-tab-title">app/attandance-detail/attandance-detail.model.ts</header>
+<pre><code class="lang-typescript">import {prop} from '@rxweb/reactive-form-validators'
+export class AttandanceDetail {
+
+    @prop()
+    entryPlace: string;
+
+    @prop()
+    entryTime: string;
+
+    @prop()
+    totalOutTime: string;
+
+    @prop()
+    exitTime: string;
+
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail-add-component" role="tabpanel" data-tab="dynamic-attandance-detail-add-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/attandance-detail/add/attandance-detail-add.component.ts</header>
+<pre><code class="lang-typescript">import { Component, OnInit } from '@angular/core';
+import { FormGroup } from &quot;@angular/forms&quot;
+
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+import { FormBuilderConfiguration  } from '@rxweb/reactive-form-validators';
+
+import { AttandanceDetail } from '../attandance-detail.model';
+
+@Component({
+    selector: 'app-attandance-detail-add',
+    templateUrl: './attandance-detail-add.component.html'
+})
+export class AttandanceDetailAddComponent implements OnInit {
+
+    attandanceDetailFormGroup: FormGroup
+
+    constructor(
+        private formBuilder: RxFormBuilder
+    ) { }
+
+    ngOnInit() {
+        let attandanceDetail = new AttandanceDetail();
+        let formBuilderConfiguration = new FormBuilderConfiguration();
+        formBuilderConfiguration.validations = {
+            entryTime : {
+                time :  {conditionalExpressions:'x =&gt; x.entryPlace == &quot;Lunch Room&quot;',} 
+            },
+            totalOutTime : {
+                time :  {allowSeconds:true,} 
+            },
+            exitTime : {
+                time :  {message:'You can enter only time format data',} 
+            },
+        };
+        this.attandanceDetailFormGroup = this.formBuilder.formGroup(attandanceDetail,formBuilderConfiguration);
+    }
+}
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-attandance-detail-add-html-component" role="tabpanel" data-tab="dynamic-attandance-detail-add-html-component" aria-hidden="true" hidden="hidden">
+<header class="header-tab-title">app/attandance-detail/add/attandance-detail-add.component.html</header>
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;time Validator Example&lt;/h1&gt;
+&lt;br/&gt;
+&lt;form *ngIf=&quot;attandanceDetailFormGroup&quot; [formGroup]=&quot;attandanceDetailFormGroup&quot;&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Entry Place&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;entryPlace&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.entryPlace.errors&quot;&gt;{{attandanceDetailFormGroup.controls.entryPlace.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Entry Time&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;entryTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;To apply the validation of time on 'Entry Time' field, then enter the value of 'Lunch Room' in Entry Place textbox.&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.entryTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.entryTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Total Time Out&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;totalOutTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Allow seconds.&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.totalOutTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.totalOutTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Exit Time&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;exitTime&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-muted&quot;&gt;Shows Custom Validation Message.&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;attandanceDetailFormGroup.controls.exitTime.errors&quot;&gt;{{attandanceDetailFormGroup.controls.exitTime.errors.time.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;button [disabled]=&quot;!attandanceDetailFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></section>
+<section id="tabpanel_CeZOj-G++Q-2_dynamic-working-example" role="tabpanel" data-tab="dynamic-working-example" aria-hidden="true" hidden="hidden">
+<iframe src="https://stackblitz.com/edit/dynamic-rxweb-time-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+</iframe></section>
+</div>
+<div id="issue"></div>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rxweb/rxweb/blob/master/docs/reactive-form-validators/validation-decorators/time.md/#L1" id="docUrl" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Your suggestion"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> </a> 
+          		  <a href="" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="View source"><i class="fa fa-code  fa-lg" aria-hidden="true"></i> </a> 
+          		  <a href="https://stackoverflow.com/questions/tagged/rxweb" target="_blank" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Ask Questions"><i class="fa fa-stack-overflow fa-lg" aria-hidden="true"></i> </a>  
+          		  <a href="https://gitter.im/rx-web/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Chat on Gitter"><i class="fa fa-comments fa-lg" aria-hidden="true"></i> </a>
+          		  <a href="https://github.com/rxweb/rxweb/tree/master/packages/reactive-form-validators" target="_blank" class="contribution-link display-inline"><i class="fa fa-github-square fa-lg" aria-hidden="true"></i> </a> 
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/moment/moment.js"></script>
+    <script type="text/javascript" src="../../styles/vendor/showdown/showdown.min.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+    <script type="text/javascript" src="../../styles/custom.js"></script>
+    <script type="text/javascript" src="../../styles/app/appStart/appModule.js"></script>
+    <script type="text/javascript" src="../../styles/app/controllers/appCtrl.js"></script>
+    <script type="text/javascript" src="../../styles/app/controllers/issueCtrl.js"></script>  </body>
+</html>

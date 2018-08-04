@@ -1,0 +1,131 @@
+<div>
+    <div>
+        <div class="tabGroup" data-bi-name="tab-group">
+            <ul  role="tablist">
+                <li role="presentation" ><a href="#opened" role="tab" aria-controls="opened" data-tab="openeds" tabindex="0" aria-selected="true" data-bi-name="tab"  ng-click="openIssue()">Open</a></li>
+                <li role="presentation"><a href="#closed" role="tab" aria-controls="closed" data-tab="closeds" tabindex="-1" data-bi-name="tab" aria-selected="false" ng-click="closeIssue()">Close</a></li>
+            </ul>
+              <section id="opened" role="tabpanel" data-tab="openeds">
+                <div class="wrapper center-block issue-list">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false" ng-repeat="openIssue in openIssues" ng-if="openIssues.length > 0">
+                    <div class="panel panel-default">
+                      <div class="issue-title">
+                        <span ng-class="{'fa fa-caret-right':!openIssue.isOpen , 'fa fa-caret-down':openIssue.isOpen}"></span>
+                        <h4>
+                          <a role="button" ng-click="viewComments(openIssue.comments_url,$index,true)">
+                            {{openIssue.title}}
+                          </a>
+                        </h4>
+                        <div class="issue-body" ng-show="openIssue.isOpen" ng-bind-html="openIssue.body">
+                        </div>
+                        <div class="issue-url">
+                          <a target="_blank" href="{{openIssue.html_url}}">
+                            #{{openIssue.number}}
+                          </a>
+                          opened by {{openIssue.dayAgo}}
+                          <a target="_blank" href="{{openIssue.user.html_url}}">
+                            {{openIssue.user.login}}
+                          </a>
+                        </div>
+                      </div>
+                      <div ng-if="openIssue.isOpen">
+                        <div class="panel-body">
+                          <div class="comment">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <hr>
+                                <div class="row" ng-repeat="comment in openIssue.comments">
+                                  <div class="col-lg-12">
+                                    <div class="media">
+                                      <a class="pull-left" target="_blank" href="{{comment.user.html_url}}">
+                                        <img class="media-object img-circle" height="50" width="50" ng-src="{{comment.user.avatar_url}}" />
+                                      </a>
+                                      <div class="media-body">
+                                        <h4 class="media-heading">
+                                          <a target="_blank" href="{{comment.user.html_url}}">{{comment.user.login}}</a> commented {{comment.dayAgo}}
+                                        </h4>
+                                        <p ng-bind-html="comment.body">
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false" ng-if="openIssues.length == 0">
+                    <div class="col-lg-12 mt-10">
+                      No Record Found.
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section id="closed" role="tabpanel" data-tab="closeds" hidden="hidden" aria-hidden="true">
+                  <div class="wrapper center-block issue-list">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false" ng-repeat="closeIssue in closeIssues">
+                      <div class="panel panel-default">
+                        <div class="issue-title">
+                          <span ng-class="{'fa fa-caret-right':!closeIssue.isOpen , 'fa fa-caret-down':closeIssue.isOpen}"></span>
+                          <h4>
+                            <a role="button" ng-click="viewComments(closeIssue.comments_url,$index,false)" data-toggle="collapse" data-parent="#accordion" href="#collapse{{closeIssue.id}}" aria-expanded="false" aria-controls="collapse{{closeIssue.id}}">
+                              {{closeIssue.title}}
+                            </a>
+                          </h4>
+                          <div class="issue-body" ng-show="closeIssue.isOpen" ng-bind-html="closeIssue.body">
+                          </div>
+                          <div class="issue-url">
+                            <a target="_blank" href="{{closeIssue.html_url}}">
+                              #{{closeIssue.number}}
+                            </a>
+                            opened by {{closeIssue.dayAgo}}
+                            <a target="_blank" href="{{closeIssue.user.html_url}}">
+                              {{closeIssue.user.login}}
+                            </a>
+                          </div>
+                        </div>
+                        <div id="collapse{{closeIssue.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{closeIssue.id}}">
+                          <div class="panel-body">
+
+                            <div class="comment">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <hr>
+                                  <div class="row" ng-repeat="comment in closeIssue.comments">
+                                    <div class="col-lg-12">
+                                      <div class="media">
+                                        <a class="pull-left" target="_blank" href="{{comment.user.html_url}}">
+                                          <img class="media-object img-circle" height="50" width="50" ng-src="{{comment.user.avatar_url}}" />
+                                        </a>
+                                        <div class="media-body">
+                                          <h4 class="media-heading">
+                                            <a target="_blank" href="{{comment.user.html_url}}">{{comment.user.login}}</a>  commented {{comment.dayAgo}}
+                                          </h4>
+                                          <p ng-bind-html="comment.body">
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false" ng-if="closeIssues.length == 0">
+                      <div class="col-lg-12 mt-10">
+                        No Record Found.
+                      </div>
+                    </div>
+                  </div>
+                </section>
+        </div>
+    </div>
+</div>
