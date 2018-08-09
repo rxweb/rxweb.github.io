@@ -101,10 +101,10 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "reactive-form-validators/validation-decorators/creditcard.md",
+      "source_relative_path": "reactive-form-validators/validation-decorators/creditCard.md",
       "output": {
         ".html": {
-          "relative_path": "reactive-form-validators/validation-decorators/creditcard.html",
+          "relative_path": "reactive-form-validators/validation-decorators/creditCard.html",
           "hash": "XOrQVHnGKSkJS6QYJr7mAw=="
         }
       },
