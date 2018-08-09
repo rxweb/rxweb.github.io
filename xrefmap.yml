@@ -21,7 +21,7 @@ references:
   href: reactive-form-validators/validation-decorators/contains.html
 - uid: validation-decorators/creditCard
   name: CreditCard Validation in Angular Reactive Forms
-  href: reactive-form-validators/validation-decorators/creditcard.html
+  href: reactive-form-validators/validation-decorators/creditCard.html
 - uid: validation-decorators/digit
   name: Digit Validation in Angular Reactive Forms
   href: reactive-form-validators/validation-decorators/digit.html
