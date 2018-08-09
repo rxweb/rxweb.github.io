@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Pattern Validation in Angular Reactive Forms </title>
+    <title>Compare Validation in Angular Reactive Forms </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Pattern Validation in Angular Reactive Forms ">
+    <meta name="title" content="Compare Validation in Angular Reactive Forms ">
     <meta name="generator" content="docfx 2.37.0.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -63,10 +63,10 @@
         <div class="article row grid-right">
           <div class="col-md-10">
 		  
-            <article class="content wrap" id="_content" data-uid="validation-decorators/pattern">
-<h1 id="pattern">pattern</h1>
+            <article class="content wrap" id="_content" data-uid="validation-decorators/compare">
+<h1 id="compare">compare</h1>
 
-<p>Pattern validation decorator will allow only match input as pattern to be entered. If user tries to enter any string which is not matched pattern then the property will become invalid. To use the pattern decorator on particular property.</p>
+<p>Compare validation decorator will compare two inputs. If user enter unmatched value then the property will become invalid. To use the compare decorator on particular property.</p>
 <div class="tabGroup" id="tabgroup_CeZOj-G++Q">
 <ul role="tablist">
 <li role="presentation">
@@ -78,18 +78,23 @@
 </ul>
 <section id="tabpanel_CeZOj-G++Q_basic-validation-on-User-add-form" role="tabpanel" data-tab="basic-validation-on-User-add-form">
 
-<p>let's create a User add form with alpha validation. The form will allow only alpha in the <code>FormControl</code> of <code>userName</code>.
-Create User data model and set the pattern decorator on <code>userName</code> property.</p>
+<p>let's create a user add form with compare validation. The form will compare inputs <code>FormControl</code> of <code>confirmPassword</code> with <code>password</code>.
+Create user data model and set the compare decorator on <code>confirmPassword</code> property.
+Create user data model and set the compare decorator on <code>confirmPassword</code> property.
+Pass parameters in compare decorator where <code>fieldName</code> is <code>password</code> for matched input field.</p>
 <header class="header-tab-title">app/User/user.model.ts</header>
-<pre><code class="lang-typescript" highlight-lines="5">import {  pattern, } from &quot;@rxweb/reactive-form-validators&quot;
+<pre><code class="lang-typescript" highlight-lines="5">import {  compare, prop  } from &quot;@rxweb/reactive-form-validators&quot;
 export class User {
 
-    @pattern({pattern:{'onlyAlpha': /^[A-Za-z]+$/} }) 
-    userName: string;
+    @prop()
+    password: string;
+
+    @compare({fieldName:'password' }) 
+    confirmPassword: string;
 
 }
 </code></pre>
-<p>Create User add component and add <code>RxFormBuilder</code> service parameter in constructor. Create a <code>FormGroup</code> object of <code>User</code> data model in <code>ngOnInit</code> method.</p>
+<p>Create user add component and add <code>RxFormBuilder</code> service parameter in constructor. Create a <code>FormGroup</code> object of <code>User</code> data model in <code>ngOnInit</code> method.</p>
 <header class="header-tab-title">app/user/add/user-add.component.ts</header>
 <pre><code class="lang-typescript" highlight-lines="17,21-22">import { Component, OnInit } from '@angular/core';
 import { FormGroup } from &quot;@angular/forms&quot;
@@ -116,34 +121,43 @@ export class UserAddComponent implements OnInit {
     }
 }
 </code></pre><header class="header-tab-title">app/user/add/user-add.component.html</header>
-<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;pattern Validator Example&lt;/h1&gt;
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;compare Validator Example&lt;/h1&gt;
 &lt;br/&gt;
 &lt;form *ngIf=&quot;userFormGroup&quot; [formGroup]=&quot;userFormGroup&quot;&gt;
 &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;User Name&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;label&gt;New Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;password&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.password.errors&quot;&gt;{{userFormGroup.controls.password.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Confirm Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;confirmPassword&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.confirmPassword.errors&quot;&gt;{{userFormGroup.controls.confirmPassword.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
 </code></pre><h3>User Add Form Validation Example</h3>
-<iframe src="https://stackblitz.com/edit/rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
+<iframe src="https://stackblitz.com/edit/rxweb-compare-validation-add-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
 </iframe></section>
 <section id="tabpanel_CeZOj-G++Q_basic-validation-on-User-edit-form" role="tabpanel" data-tab="basic-validation-on-User-edit-form" aria-hidden="true" hidden="hidden">
 
-<p>let's create a User edit form with alpha validation. The form will allow only alpha in the <code>FormControl</code> of <code>userName</code>.
-Create User data model and set the pattern decorator on <code>userName</code> property.</p>
+<p>let's create a user edit form with compare validation. The form will compare inputs <code>FormControl</code> of <code>confirmPassword</code> with <code>password</code>.
+Create user data model and set the compare decorator on <code>confirmPassword</code> property.
+Create user data model and set the compare decorator on <code>confirmPassword</code> property.
+Pass parameters in compare decorator where <code>fieldName</code> is <code>password</code> for matched input field.</p>
 <header class="header-tab-title">app/User/user.model.ts</header>
-<pre><code class="lang-typescript" highlight-lines="5">import {  pattern, } from &quot;@rxweb/reactive-form-validators&quot;
+<pre><code class="lang-typescript" highlight-lines="5">import {  compare, prop  } from &quot;@rxweb/reactive-form-validators&quot;
 export class User {
 
-    @pattern({pattern:{'onlyAlpha': /^[A-Za-z]+$/} }) 
-    userName: string;
+    @prop()
+    password: string;
+
+    @compare({fieldName:'password' }) 
+    confirmPassword: string;
 
 }
 </code></pre>
-<p>Create User edit component and add <code>RxFormBuilder</code> and <code>HttpClient</code> service parameter  in constructor. On <code>ngOnInit</code> method get request method for getting data from json or server and that data pass in <code>this.formBuilder.formGroup&lt;User&gt;(User,user)</code></p>
+<p>Create user edit component and add <code>RxFormBuilder</code> and <code>HttpClient</code> service parameter  in constructor. On <code>ngOnInit</code> method get request method for getting data from json or server and that data pass in <code>this.formBuilder.formGroup&lt;User&gt;(User,user)</code></p>
 <header class="header-tab-title">app/user/edit/user-edit.component.ts</header>
 <pre><code class="lang-typescript" highlight-lines="17,21-22">import { Component, OnInit } from '@angular/core';
 import { FormGroup } from &quot;@angular/forms&quot;
@@ -173,23 +187,27 @@ export class UserEditComponent implements OnInit {
     }
 }
 </code></pre><header class="header-tab-title">app/user/edit/user-edit.component.html</header>
-<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;pattern Validator Example&lt;/h1&gt;
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;compare Validator Example&lt;/h1&gt;
 &lt;br/&gt;
 &lt;form *ngIf=&quot;userFormGroup&quot; [formGroup]=&quot;userFormGroup&quot;&gt;
 &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;User Name&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;label&gt;Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;password&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.password.errors&quot;&gt;{{userFormGroup.controls.password.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-group&quot;&gt;
+    &lt;label&gt;Confirm Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;confirmPassword&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.confirmPassword.errors&quot;&gt;{{userFormGroup.controls.confirmPassword.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
 </code></pre><h3>User Edit Form Validation Example</h3>
-<iframe src="https://stackblitz.com/edit/rxweb-pattern-validation-edit-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
+<iframe src="https://stackblitz.com/edit/rxweb-compare-validation-edit-angular-reactive-form?embed=1&file=src/styles.css&hideExplorer=1&hideNavigation=1&view=preview" width="100%" height="300">
 </iframe></section>
 </div>
-<h1 id="patternconfig">PatternConfig</h1>
-<p>message,conditionalExpression options are not mandatory to use in the <code>@pattern()</code> decorator but pattern is mandatory. If needed then use the below options.</p>
+<h1 id="compareconfig">CompareConfig</h1>
+<p>Below options are use in the <code>@compare()</code> decorator. If needed then use the below options.</p>
 <table>
 <thead>
 <tr>
@@ -199,49 +217,28 @@ export class UserEditComponent implements OnInit {
 </thead>
 <tbody>
 <tr>
+<td><a href="#fieldname">fieldName</a></td>
+<td>Current property is matched with the particular property. so we need to pass particular property name.</td>
+</tr>
+<tr>
 <td><a href="#message">message</a></td>
 <td>To override the global configuration message and show the custom message on particular control property.</td>
 </tr>
-<tr>
-<td><a href="#conditionalexpression">conditionalExpression</a></td>
-<td>Pattern validation should be applied if the condition is matched in the <code>conditionalExpression</code> function. Validation framework will pass two parameters at the time of <code>conditionalExpression</code> check. Those two parameters are current <code>FormGroup</code> value and root <code>FormGroup</code> value. You can apply the condition on respective object value.If there is need of dynamic validation means it is not fixed in client code, it will change based on some criterias. In this scenario you can bind the expression based on the expression value is coming from the web server in <code>string</code> format. The <code>conditionalExpression</code> will work as same as client function.</td>
-</tr>
-<tr>
-<td><a href="#pattern">pattern</a></td>
-<td>enter specific regex pattern</td>
-</tr>
 </tbody>
 </table>
-<h2 id="message">message</h2>
+<h2 id="fieldname">fieldName</h2>
+<p>Type :  <code>string</code></p>
+<p>Current property is matched with the particular property. so we need to pass particular property name.</p>
+<header class="header-title">user.model.ts (User class property)</header>
+<pre><code class="lang-typescript">@compare({fieldName:'password'  ,message:'Both Input is not matched' }) 
+confirmPassword: string;
+</code></pre><h2 id="message">message</h2>
 <p>Type :  <code>string</code></p>
 <p>To override the global configuration message and show the custom message on particular control property.</p>
 <header class="header-title">user.model.ts (User class property)</header>
-<pre><code class="lang-typescript">@pattern({pattern:{'zipCode':/^\d{5}(?:[-\s]\d{4})?$/ }  ,message:'Zipcode must be 5 digits' }) 
-zipCode: string;
-</code></pre><h2 id="conditionalexpression">conditionalExpression</h2>
-<p>Type :  <code>Function</code>  |  <code>string</code></p>
-<p>Pattern validation should be applied if the condition is matched in the <code>conditionalExpression</code> function. Validation framework will pass two parameters at the time of <code>conditionalExpression</code> check. Those two parameters are current <code>FormGroup</code> value and root <code>FormGroup</code> value. You can apply the condition on respective object value.
-If there is need of dynamic validation means it is not fixed in client code, it will change based on some criterias. In this scenario you can bind the expression based on the expression value is coming from the web server in <code>string</code> format. The <code>conditionalExpression</code> will work as same as client function.</p>
-<blockquote>
-<p>Binding <code>conditionalExpression</code> with <code>Function</code> object.</p>
-</blockquote>
-<header class="header-title">user.model.ts (User class property)</header>
-<pre><code class="lang-typescript">@pattern({pattern:{'onlyDigit': /^[0-9]*$/}  ,conditionalExpressions:x=&gt;x.userName=='John' }) 
-age: string;
-</code></pre>
-<blockquote>
-<p>Binding <code>conditionalExpression</code> with <code>string</code> datatype.</p>
-</blockquote>
-<header class="header-title">user.model.ts (User class property)</header>
-<pre><code class="lang-typescript">@pattern({pattern:{'onlyDigit': /^[0-9]*$/}  ,conditionalExpressions:x=&gt;x.userName=='John' }) 
-age: string;
-</code></pre><h2 id="pattern-1">pattern</h2>
-<p>Type :  <code>string</code></p>
-<p>enter specific regex pattern</p>
-<header class="header-title">user.model.ts (User class property)</header>
-<pre><code class="lang-typescript">@pattern({pattern:{'zipCode':/^\d{5}(?:[-\s]\d{4})?$/ }  ,message:'Zipcode must be 5 digits' }) 
-zipCode: string;
-</code></pre><h1 id="pattern-validation-complete-example">pattern Validation Complete Example</h1>
+<pre><code class="lang-typescript">@compare({fieldName:'password'  ,message:'Both Input is not matched' }) 
+confirmPassword: string;
+</code></pre><h1 id="compare-validation-complete-example">compare Validation Complete Example</h1>
 <div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
 <ul role="tablist">
 <li role="presentation">
@@ -259,17 +256,14 @@ zipCode: string;
 </ul>
 <section id="tabpanel_CeZOj-G++Q-1_complete-user" role="tabpanel" data-tab="complete-user">
 <header class="header-tab-title">app/user/user.model.ts</header>
-<pre><code class="lang-typescript">import {  pattern, } from &quot;@rxweb/reactive-form-validators&quot;
+<pre><code class="lang-typescript">import {  compare, prop  } from &quot;@rxweb/reactive-form-validators&quot;
 export class User {
 
-    @pattern({pattern:{'onlyAlpha': /^[A-Za-z]+$/} }) 
-    userName: string;
+    @prop()
+    password: string;
 
-    @pattern({pattern:{'zipCode':/^\d{5}(?:[-\s]\d{4})?$/ }  ,message:'Zipcode must be 5 digits' }) 
-    zipCode: string;
-
-    @pattern({pattern:{'onlyDigit': /^[0-9]*$/}  ,conditionalExpressions:x=&gt;x.userName=='John' }) 
-    age: string;
+    @compare({fieldName:'password'  ,message:'Both Input is not matched' }) 
+    confirmPassword: string;
 
 }
 </code></pre></section>
@@ -302,35 +296,27 @@ export class UserAddComponent implements OnInit {
 </code></pre></section>
 <section id="tabpanel_CeZOj-G++Q-1_complete-user-add-html-component" role="tabpanel" data-tab="complete-user-add-html-component" aria-hidden="true" hidden="hidden">
 <header class="header-tab-title">app/user/add/user-add.component.html</header>
-<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;pattern Validator Example&lt;/h1&gt;
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;compare Validator Example&lt;/h1&gt;
 &lt;br/&gt;
 &lt;form *ngIf=&quot;userFormGroup&quot; [formGroup]=&quot;userFormGroup&quot;&gt;
 &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;User Name&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;label&gt;Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;password&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.password.errors&quot;&gt;{{userFormGroup.controls.password.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;Zip Code&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;zipCode&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that zipcode match zipcode regex or not and it shows custom message&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.zipCode.errors&quot;&gt;{{userFormGroup.controls.zipCode.errors.zipCode.message}}&lt;br/&gt;&lt;/small&gt;
-&lt;/div&gt;
-&lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;Age&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;age&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that age match with digit regex or not and it conditionaly applied when userName is John&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.age.errors&quot;&gt;{{userFormGroup.controls.age.errors.onlyDigit.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;label&gt;Confirm Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;confirmPassword&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.confirmPassword.errors&quot;&gt;{{userFormGroup.controls.confirmPassword.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
 </code></pre></section>
 <section id="tabpanel_CeZOj-G++Q-1_complete-working-example" role="tabpanel" data-tab="complete-working-example" aria-hidden="true" hidden="hidden">
-<iframe src="https://stackblitz.com/edit/complete-rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+<iframe src="https://stackblitz.com/edit/complete-rxweb-compare-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
 </iframe></section>
 </div>
-<h1 id="dynamic-pattern-validation-complete-example">Dynamic pattern Validation Complete Example</h1>
+<h1 id="dynamic-compare-validation-complete-example">Dynamic compare Validation Complete Example</h1>
 <div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
 <ul role="tablist">
 <li role="presentation">
@@ -352,13 +338,10 @@ export class UserAddComponent implements OnInit {
 export class User {
 
     @prop()
-    userName: string;
+    password: string;
 
     @prop()
-    zipCode: string;
-
-    @prop()
-    age: string;
+    confirmPassword: string;
 
 }
 </code></pre></section>
@@ -388,14 +371,8 @@ export class UserAddComponent implements OnInit {
         let user = new User();
         let formBuilderConfiguration = new FormBuilderConfiguration();
         formBuilderConfiguration.validations = {
-            userName : {
-                pattern :  {pattern:{'onlyAlpha': /^[A-Za-z]+$/},} 
-            },
-            zipCode : {
-                pattern :  {pattern:{'zipCode':/^\d{5}(?:[-\s]\d{4})?$/ },message:'Zipcode must be 5 digits',} 
-            },
-            age : {
-                pattern :  {pattern:{'onlyDigit': /^[0-9]*$/},conditionalExpressions:'x=&gt;x.userName==&quot;John&quot;',} 
+            confirmPassword : {
+                compare :  {fieldName:'password',message:'Both Input is not matched',} 
             },
         };
         this.userFormGroup = this.formBuilder.formGroup(user,formBuilderConfiguration);
@@ -404,32 +381,24 @@ export class UserAddComponent implements OnInit {
 </code></pre></section>
 <section id="tabpanel_CeZOj-G++Q-2_dynamic-user-add-html-component" role="tabpanel" data-tab="dynamic-user-add-html-component" aria-hidden="true" hidden="hidden">
 <header class="header-tab-title">app/user/add/user-add.component.html</header>
-<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;pattern Validator Example&lt;/h1&gt;
+<pre><code class="lang-html">&lt;h1 class=&quot;bd-title&quot; id=&quot;content&quot;&gt;compare Validator Example&lt;/h1&gt;
 &lt;br/&gt;
 &lt;form *ngIf=&quot;userFormGroup&quot; [formGroup]=&quot;userFormGroup&quot;&gt;
 &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;User Name&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;label&gt;Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;password&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.password.errors&quot;&gt;{{userFormGroup.controls.password.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;Zip Code&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;zipCode&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that zipcode match zipcode regex or not and it shows custom message&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.zipCode.errors&quot;&gt;{{userFormGroup.controls.zipCode.errors.zipCode.message}}&lt;br/&gt;&lt;/small&gt;
-&lt;/div&gt;
-&lt;div class=&quot;form-group&quot;&gt;
-    &lt;label&gt;Age&lt;/label&gt;
-    &lt;input type=&quot;text&quot; formControlName=&quot;age&quot; class=&quot;form-control&quot;  /&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that age match with digit regex or not and it conditionaly applied when userName is John&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.age.errors&quot;&gt;{{userFormGroup.controls.age.errors.onlyDigit.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;label&gt;Confirm Password&lt;/label&gt;
+    &lt;input type=&quot;text&quot; formControlName=&quot;confirmPassword&quot; class=&quot;form-control&quot;  /&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.confirmPassword.errors&quot;&gt;{{userFormGroup.controls.confirmPassword.errors.compare.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
 </code></pre></section>
 <section id="tabpanel_CeZOj-G++Q-2_dynamic-working-example" role="tabpanel" data-tab="dynamic-working-example" aria-hidden="true" hidden="hidden">
-<iframe src="https://stackblitz.com/edit/dynamic-rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+<iframe src="https://stackblitz.com/edit/dynamic-rxweb-compare-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
 </iframe></section>
 </div>
 <div id="issue"></div>
@@ -441,7 +410,7 @@ export class UserAddComponent implements OnInit {
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/rxweb/rxweb/blob/dev/docs/reactive-form-validators/validation-decorators/pattern.md/#L1" id="docUrl" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Your suggestion"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> </a> 
+                    <a href="https://github.com/rxweb/rxweb/blob/master/docs/reactive-form-validators/validation-decorators/compare.md/#L1" id="docUrl" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Your suggestion"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> </a> 
           		  <a href="" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="View source"><i class="fa fa-code  fa-lg" aria-hidden="true"></i> </a> 
           		  <a href="https://stackoverflow.com/questions/tagged/rxweb" target="_blank" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Ask Questions"><i class="fa fa-stack-overflow fa-lg" aria-hidden="true"></i> </a>  
           		  <a href="https://gitter.im/rx-web/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge" class="contribution-link display-inline" data-toggle="tooltip" data-placement="top" title="Chat on Gitter"><i class="fa fa-comments fa-lg" aria-hidden="true"></i> </a>

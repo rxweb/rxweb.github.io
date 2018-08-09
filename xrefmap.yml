@@ -13,6 +13,9 @@ references:
 - uid: validation-decorators/alphaNumeric
   name: AlphaNumeric Validation in Angular Reactive Forms
   href: reactive-form-validators/validation-decorators/alphaNumeric.html
+- uid: validation-decorators/compare
+  name: Compare Validation in Angular Reactive Forms
+  href: reactive-form-validators/validation-decorators/compare.html
 - uid: validation-decorators/contains
   name: Contains Validation in Angular Reactive Forms
   href: reactive-form-validators/validation-decorators/contains.html
