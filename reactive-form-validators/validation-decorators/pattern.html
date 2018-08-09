@@ -123,7 +123,7 @@ export class UserAddComponent implements OnInit {
     &lt;label&gt;User Name&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
@@ -180,7 +180,7 @@ export class UserEditComponent implements OnInit {
     &lt;label&gt;User Name&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
@@ -309,25 +309,25 @@ export class UserAddComponent implements OnInit {
     &lt;label&gt;User Name&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
     &lt;label&gt;Zip Code&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;zipCode&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that zipcode match zipcode regex or not and it shows custom message&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.zipCode.errors&quot;&gt;{{userFormGroup.controls.zipCode.errors.zipCode.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.zipCode.errors&quot;&gt;{{userFormGroup.controls.zipCode.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
     &lt;label&gt;Age&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;age&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that age match with digit regex or not and it conditionaly applied when userName is John&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.age.errors&quot;&gt;{{userFormGroup.controls.age.errors.onlyDigit.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.age.errors&quot;&gt;{{userFormGroup.controls.age.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
 </code></pre></section>
 <section id="tabpanel_CeZOj-G++Q-1_complete-working-example" role="tabpanel" data-tab="complete-working-example" aria-hidden="true" hidden="hidden">
-<iframe src="https://stackblitz.com/edit/complete-rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+<iframe src="https://stackblitz.com/edit/complete-rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/app/user/user.model.ts&hideNavigation=1&view=preview" width="100%" height="500">
 </iframe></section>
 </div>
 <h1 id="dynamic-pattern-validation-complete-example">Dynamic pattern Validation Complete Example</h1>
@@ -395,7 +395,7 @@ export class UserAddComponent implements OnInit {
                 pattern :  {pattern:{'zipCode':/^\d{5}(?:[-\s]\d{4})?$/ },message:'Zipcode must be 5 digits',} 
             },
             age : {
-                pattern :  {pattern:{'onlyDigit': /^[0-9]*$/},conditionalExpressions:'x=&gt;x.userName==&quot;John&quot;',} 
+                pattern :  {pattern:{'onlyDigit': /^[0-9]*$/},conditionalExpressions:'x=&gt;x.userName=='John'',} 
             },
         };
         this.userFormGroup = this.formBuilder.formGroup(user,formBuilderConfiguration);
@@ -411,25 +411,25 @@ export class UserAddComponent implements OnInit {
     &lt;label&gt;User Name&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;userName&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that username match alpha regex or not&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.onlyAlpha.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.userName.errors&quot;&gt;{{userFormGroup.controls.userName.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
     &lt;label&gt;Zip Code&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;zipCode&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that zipcode match zipcode regex or not and it shows custom message&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.zipCode.errors&quot;&gt;{{userFormGroup.controls.zipCode.errors.zipCode.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.zipCode.errors&quot;&gt;{{userFormGroup.controls.zipCode.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
     &lt;label&gt;Age&lt;/label&gt;
     &lt;input type=&quot;text&quot; formControlName=&quot;age&quot; class=&quot;form-control&quot;  /&gt;
     &lt;small class=&quot;form-text text-muted&quot;&gt;It checked that age match with digit regex or not and it conditionaly applied when userName is John&lt;br/&gt;&lt;/small&gt;
-    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.age.errors&quot;&gt;{{userFormGroup.controls.age.errors.onlyDigit.message}}&lt;br/&gt;&lt;/small&gt;
+    &lt;small class=&quot;form-text text-danger&quot; *ngIf=&quot;userFormGroup.controls.age.errors&quot;&gt;{{userFormGroup.controls.age.errors.pattern.message}}&lt;br/&gt;&lt;/small&gt;
 &lt;/div&gt;
 &lt;button [disabled]=&quot;!userFormGroup.valid&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
 </code></pre></section>
 <section id="tabpanel_CeZOj-G++Q-2_dynamic-working-example" role="tabpanel" data-tab="dynamic-working-example" aria-hidden="true" hidden="hidden">
-<iframe src="https://stackblitz.com/edit/dynamic-rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/app/address-info/address&hideNavigation=1&view=preview" width="100%" height="500">
+<iframe src="https://stackblitz.com/edit/dynamic-rxweb-pattern-validation-add-angular-reactive-form?embed=1&file=src/app/user/user.model.ts&hideNavigation=1&view=preview" width="100%" height="500">
 </iframe></section>
 </div>
 <div id="issue"></div>
